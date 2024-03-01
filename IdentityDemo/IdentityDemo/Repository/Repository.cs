@@ -26,12 +26,13 @@ namespace IdentityDemo.Repository
 
 			basicHttpBinding =
 				new BasicHttpBinding(endpointAddress.Uri.Scheme.ToLower() == "http" ?
-							BasicHttpSecurityMode.None : BasicHttpSecurityMode.Transport);
-
-			basicHttpBinding.OpenTimeout = TimeSpan.MaxValue;
-			basicHttpBinding.CloseTimeout = TimeSpan.MaxValue;
-			basicHttpBinding.ReceiveTimeout = TimeSpan.MaxValue;
-			basicHttpBinding.SendTimeout = TimeSpan.MaxValue;
+							BasicHttpSecurityMode.None : BasicHttpSecurityMode.Transport)
+				{
+					OpenTimeout = TimeSpan.MaxValue,
+					CloseTimeout = TimeSpan.MaxValue,
+					ReceiveTimeout = TimeSpan.MaxValue,
+					SendTimeout = TimeSpan.MaxValue
+				};
 		}
 
 		public async Task<SoapDemoSoapClient> GetInstanceAsync()
@@ -47,14 +48,16 @@ namespace IdentityDemo.Repository
 				var client = await GetInstanceAsync();
 				var result = await client.loginAsync(loginView.Email, loginView.Password);
 
-				DataTable dt = new DataTable();
+				DataTable dt = new();
 				dt = JsonConvert.DeserializeObject<DataTable>(result.Body.loginResult.Data);
 
-				IdentityModel user = new IdentityModel();
-				user.ID = int.Parse(dt.Rows[0]["ID"].ToString());
-				user.Email = dt.Rows[0]["Email"].ToString();
-				user.Role = dt.Rows[0]["Role"].ToString();
-				user.Reg_Date = dt.Rows[0]["Reg_Date"].ToString();
+				IdentityModel user = new()
+				{
+					ID = int.Parse(dt.Rows[0]["ID"].ToString()),
+					Email = dt.Rows[0]["Email"].ToString(),
+					Role = dt.Rows[0]["Role"].ToString(),
+					Reg_Date = dt.Rows[0]["Reg_Date"].ToString()
+				};
 
 				response.Data = user;
 				response.message = (result.Body.loginResult.resultCode == 500) ? "Login failed.Please check Username and / or password" : "data found";
