@@ -27,7 +27,7 @@ namespace SoapDemo
 
 			if (email != null)
 			{
-				using (SqlConnection conn = new SqlConnection(@"Data Source=ALA-IT-48131\SQLEXPRESS;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
+				using (SqlConnection conn = new SqlConnection(@"Data Source=ALA-IT-48131\SQLEXPRESS;Initial Catalog=IdentityDemo;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
 				{
 					SqlCommand cmd = new SqlCommand("sp_loginUser", conn)
 					{
