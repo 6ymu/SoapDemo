@@ -12,7 +12,7 @@ namespace SoapDemo
 	[WebService(Namespace = "http://tempuri.org/")]
 	[WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
 	[System.ComponentModel.ToolboxItem(false)]
-	public class SoapDemo : WebService
+	public class SoapDemo : System.Web.Services.WebService
 	{
 		[WebMethod]
 		public string HelloWorld()
