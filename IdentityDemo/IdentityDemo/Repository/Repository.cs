@@ -92,7 +92,7 @@ namespace IdentityDemo.Repository
 
 		public async Task<Response<string>> RegisterAsync(RegisterViewModel registerView)
 		{
-			Response<string> response = new Response<string>();
+			Response<string> response = new();
 			var sp_params = new DynamicParameters();
 			sp_params.Add("email", registerView.Email, DbType.String);
 			sp_params.Add("password", registerView.Password, DbType.String);
