@@ -29,8 +29,10 @@ namespace SoapDemo
 			{
 				using (SqlConnection conn = new SqlConnection(@"Data Source=ALA-IT-48131\SQLEXPRESS;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
 				{
-					SqlCommand cmd = new SqlCommand("sp_loginUser", conn);
-					cmd.CommandType = CommandType.StoredProcedure;
+					SqlCommand cmd = new SqlCommand("sp_loginUser", conn)
+					{
+						CommandType = CommandType.StoredProcedure
+					};
 					cmd.Parameters.Add("@email", SqlDbType.NVarChar, 50).Value = email;
 					cmd.Parameters.Add("@password", SqlDbType.NVarChar, 50).Value = password;
 
